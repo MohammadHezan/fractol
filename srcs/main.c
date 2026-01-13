@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:32:09 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/11 20:37:28 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/14 00:40:25 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int	main(int argc, char **argv)
 		fractol.name = argv[1];
 		if (!ft_strncmp(fractol.name, "julia", 5))
 		{
-			fractol.offset_x = atoi(argv[2]);
-			fractol.offset_y = atoi(argv[3]);
+			fractol.julia_real = atof(argv[2]);
+			fractol.julia_imag = atof(argv[3]);
 		}
 		init_fractol(&fractol);
-		//fractal_render(&fractol);
-		//mlx_loop(fractol.mlx);
+		events_init(&fractol);
+		fractol_render(&fractol);
+		mlx_loop(fractol.mlx);
 	}
 }

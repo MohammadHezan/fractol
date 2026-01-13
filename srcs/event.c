@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:59:35 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/11 20:27:32 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/14 00:30:16 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,45 @@ int handle_keypress(int keycode, t_fractol *fractol)
     else if (keycode == XK_plus || keycode == XK_equal)
         fractol->max_iter += 10;
     else if (keycode == XK_minus || keycode == XK_underscore)
-        fractol->zoom -= 10;
-    fractal_render(fractol);
+        fractol->max_iter -= 10;
+    fractol_render(fractol);
     return (0);
 }
-int handle_mouse(int button, int x, int y, t_fractol *fractol)
+
+int handle_mouse(int mouse_button, int mouse_x, int mouse_y, t_fractol *fractol)
 {
-    if (button == Button5)
-		fractol->zoom *= 0.95;
-	else if (button == Button4)
-		fractol->zoom *= 1.05;
-	fractal_render(fractol);
-	return 0;
+	double	zoom_factor;
+	double	complex_real;
+	double	complex_imag;
+
+	if (mouse_button == Button4)
+		zoom_factor = 1.2;
+	else if (mouse_button == Button5)
+		zoom_factor = 0.8;
+	else
+		return (0);
+
+	complex_real = (mouse_x - WIDTH / 2.0)
+		/ (0.5 * fractol->zoom * WIDTH) + fractol->offset_x;
+	complex_imag = (mouse_y - HEIGHT / 2.0)
+		/ (0.5 * fractol->zoom * HEIGHT) + fractol->offset_y;
+
+	fractol->zoom *= zoom_factor;
+	fractol->offset_x = complex_real
+		- (mouse_x - WIDTH / 2.0)
+		/ (0.5 * fractol->zoom * WIDTH);
+	fractol->offset_y = complex_imag
+		- (mouse_y - HEIGHT / 2.0)
+		/ (0.5 * fractol->zoom * HEIGHT);
+	fractol_render(fractol);
+	return (0);
 }
+
 int close_window(t_fractol *fractol)
 {
     mlx_destroy_image(fractol->mlx, fractol->img.img_ptr);
     mlx_destroy_window(fractol->mlx, fractol->win);
     mlx_destroy_display(fractol->mlx);
     free(fractol->mlx);
-    exit(EXIT_SUCCESS);
-    return (0);
+    exit(0);
 }

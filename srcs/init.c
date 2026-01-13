@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:41:05 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/11 20:50:54 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/13 23:50:36 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void    error(void)
 {
-    write(2, "Memory allocation failed\n", 26);
+    int check = write(2, "Memory allocation failed\n", 26);
+    (void)check;
     exit(EXIT_FAILURE);
 }
 void    image_data(t_fractol *fractol)
@@ -55,5 +56,6 @@ void	init_fractol(t_fractol *fractol)
 void    events_init(t_fractol *fractol)
 {
     mlx_key_hook(fractol->win, handle_keypress, fractol);
-    mlx_mouse_hook(fractol->win, handle_mouse, fractol);
+    mlx_hook(fractol->win, 17, 0, close_window, fractol);
+    mlx_hook(fractol->win, 4, 1L << 2, handle_mouse, fractol);
 }

@@ -2,20 +2,20 @@ NAME = fractol
 CC = cc
 CFLAGS = -Wall -Wextra -Werror 
 
-SRCS = 	src/main.c \
-		src/init.c \
-		src/event.c \
-		src/rendering.c \
-		src/maths.c
+SRCS = 	srcs/main.c \
+		srcs/init.c \
+		srcs/event.c \
+		srcs/rendering.c \
+		srcs/maths.c
 
 OBJS = $(SRCS:.c=.o)
 
-MLX_DIR = minilibx-linux
-MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_DIR = minilibx_linux
+MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -I$(MLX_DIR) -O3 -c $< -o $@
 	
 all: $(MLX_LIB) $(NAME)
 
