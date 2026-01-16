@@ -6,7 +6,8 @@ SRCS = 	srcs/main.c \
 		srcs/init.c \
 		srcs/event.c \
 		srcs/rendering.c \
-		srcs/maths.c 
+		srcs/maths.c \
+		srcs/colors.c 
 
 OBJS = $(SRCS:.c=.o)
 

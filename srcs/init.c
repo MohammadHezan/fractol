@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:41:05 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/15 11:41:45 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/16 20:56:04 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_fractol(t_fractol *fractol)
 	fractol->c.imag = 0.27015;
 	fractol->escape = 4;
 	fractol->julia_index = 0;
+	fractol->color_scheme = 0;
 }
 
 void	events_init(t_fractol *fractol)
@@ -65,17 +66,16 @@ void	events_init(t_fractol *fractol)
 	mlx_hook(fractol->win, 4, 1L << 2, handle_mouse, fractol);
 }
 
-int	get_color(int i, int max_iter)
+int	get_color(int i, int max_iter, int color_scheme)
 {
-	double	r;
-	double	g;
-	double	b;
-	double	frequency;
-
-	(void)max_iter;
-	frequency = 0.1;
-	r = sin(frequency * i + 0) * 127 + 128;
-	g = sin(frequency * i + 2) * 127 + 128;
-	b = sin(frequency * i + 4) * 127 + 128;
-	return (((int)r << 16) | ((int)g << 8) | (int)b);
+	if (color_scheme == 0)
+		return (scheme_rainbow(i, max_iter));
+	else if (color_scheme == 1)
+		return (scheme_fire(i, max_iter));
+	else if (color_scheme == 2)
+		return (scheme_ice(i, max_iter));
+	else if (color_scheme == 3)
+		return (scheme_purple(i, max_iter));
+	else
+		return (scheme_green(i, max_iter));
 }

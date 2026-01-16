@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:43:10 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/15 11:27:25 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/16 19:58:14 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	handle_pixel(int real, int imag, t_fractol *fractol)
 	{
 		if ((coords[0] * coords[0] + coords[1] * coords[1]) > fractol->escape)
 		{
-			color = get_color(i, fractol->max_iter);
+			color = get_color(i, fractol->max_iter, fractol->color_scheme);
 			imag_pixel_put(real, imag, &fractol->img, color);
 			return ;
 		}

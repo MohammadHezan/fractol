@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:32:23 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/15 11:50:54 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/16 20:54:08 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 # define XK_I 105
 # define XK_M 109
 # define XK_SPACE 32
+# define XK_C 99
 
 # define BUTTON5 5
 # define BUTTON4 4
@@ -83,6 +84,7 @@ typedef struct s_fractol
 	double			julia_real;
 	double			julia_imag;
 	int				julia_index;
+	int				color_scheme;
 }					t_fractol;
 
 int			handle_mouse(int mouse_button, int mouse_x, int mouse_y,
@@ -101,6 +103,11 @@ void		handle_pixel(int real, int imag, t_fractol *fractol);
 int			fractol_render(t_fractol *fractol);
 void		imag_pixel_put(int real, int imag, t_image *img, int color);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			get_color(int i, int max_iter);
+int			get_color(int i, int max_iter, int color_scheme);
+int			scheme_rainbow(int i, int max_iter);
+int			scheme_fire(int i, int max_iter);
+int			scheme_ice(int i, int max_iter);
+int			scheme_purple(int i, int max_iter);
+int			scheme_green(int i, int max_iter);
 
 #endif
