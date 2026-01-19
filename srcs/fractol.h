@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:32:23 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/16 20:54:08 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/19 20:45:46 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "../minilibx_linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 
-# define WIDTH 400
+# define WIDTH 2000
 # define HEIGHT 400
 
 # define BLACK       0x000000
@@ -109,5 +109,6 @@ int			scheme_fire(int i, int max_iter);
 int			scheme_ice(int i, int max_iter);
 int			scheme_purple(int i, int max_iter);
 int			scheme_green(int i, int max_iter);
+double		ft_atof(const char *str);
 
 #endif

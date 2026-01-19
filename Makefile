@@ -11,7 +11,7 @@ SRCS = 	srcs/main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-MLX_DIR = minilibx_linux
+MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 

@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:56:38 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/15 11:24:03 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/19 19:10:38 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,31 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (i < n - 1 && s1[i] == s2[i])
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+double	ft_atof(const char *str)
+{
+	double	res[2];
+	int		sign;
+
+	res[0] = 0.0;
+	res[1] = 1.0;
+	sign = 1;
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			sign = -1;
+	while (*str >= '0' && *str <= '9')
+		res[0] = res[0] * 10.0 + (*str++ - '0');
+	if (*str == '.')
+	{
+		str++;
+		while (*str >= '0' && *str <= '9')
+		{
+			res[1] *= 10.0;
+			res[0] += (*str++ - '0') / res[1];
+		}
+	}
+	return (sign * res[0]);
 }

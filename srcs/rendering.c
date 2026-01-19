@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:43:10 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/16 19:58:14 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/19 20:44:48 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,29 @@ void	imag_pixel_put(int real, int imag, t_image *img, int color)
 
 static void	init_coords(int x, int y, t_fractol *f, double coords[4])
 {
-	coords[0] = (x - WIDTH / 2.0) * (4.0 / WIDTH * f->zoom) + f->offset_x;
-	coords[1] = (y - HEIGHT / 2.0) * (4.0 / HEIGHT * f->zoom) + f->offset_y;
+	double	scale;
+	double	px;
+	double	py;
+
+	if (WIDTH < HEIGHT)
+		scale = 4.0 / WIDTH;
+	else
+		scale = 4.0 / HEIGHT;
+	px = (x - WIDTH / 2.0) * (scale * f->zoom) + f->offset_x;
+	py = (y - HEIGHT / 2.0) * (scale * f->zoom) + f->offset_y;
 	if (!ft_strncmp(f->name, "julia", 5))
 	{
+		coords[0] = px;
+		coords[1] = py;
 		coords[2] = f->julia_real;
 		coords[3] = f->julia_imag;
 	}
 	else
 	{
-		coords[2] = coords[0];
-		coords[3] = coords[1];
+		coords[0] = 0;
+		coords[1] = 0;
+		coords[2] = px;
+		coords[3] = py;
 	}
 }
 
