@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:59:35 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/19 20:25:15 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/20 16:28:55 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	update_julia(int keycode, t_fractol *fractol)
 int	handle_keypress(int keycode, t_fractol *fractol)
 {
 	if (keycode == XK_ESCAPE)
-		close_window(fractol);
+		mlx_loop_end(fractol->mlx);
 	else if (keycode == XK_LEFT)
 		fractol->offset_x -= (0.5 * fractol->zoom);
 	else if (keycode == XK_RIGHT)
@@ -69,26 +69,33 @@ static void	apply_zoom(int mouse_x, int mouse_y, t_fractol *f, double zf)
 	f->offset_y = ci - (mouse_y - HEIGHT / 2.0) * (scale * f->zoom);
 }
 
-int	handle_mouse(int mouse_button, int mouse_x, int mouse_y, t_fractol *fractol)
+int	handle_mouse(int button, int x, int y, t_fractol *fractol)
 {
 	double	zoom_factor;
 
-	if (mouse_button == BUTTON5)
+	if (button == BUTTON5)
 		zoom_factor = 1.1;
-	else if (mouse_button == BUTTON4)
+	else if (button == BUTTON4)
 		zoom_factor = 0.9;
 	else
 		return (0);
-	apply_zoom(mouse_x, mouse_y, fractol, zoom_factor);
+	apply_zoom(x, y, fractol, zoom_factor);
 	fractol_render(fractol);
 	return (0);
 }
 
-int	close_window(t_fractol *fractol)
+int	close_window(t_fractol *fractol, char *msg, int code)
 {
-	mlx_destroy_image(fractol->mlx, fractol->img.img_ptr);
-	mlx_destroy_window(fractol->mlx, fractol->win);
-	mlx_destroy_display(fractol->mlx);
-	free(fractol->mlx);
-	exit(0);
+	if (fractol->img.img_ptr)
+		mlx_destroy_image(fractol->mlx, fractol->img.img_ptr);
+	if (fractol->win)
+		mlx_destroy_window(fractol->mlx, fractol->win);
+	if (fractol->mlx)
+	{
+		mlx_loop_end(fractol->mlx);
+		free(fractol->mlx);
+	}
+	if (msg)
+		write(2, msg, ft_strlen(msg));
+	exit(code);
 }

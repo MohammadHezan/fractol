@@ -6,18 +6,13 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:56:38 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/19 19:10:38 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/20 16:28:20 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	map(double num, double new_min, double new_max, double old_max)
-{
-	return ((new_max - new_min) * (num) / (old_max) + new_min);
-}
-
-t_complex	sum(t_complex z1, t_complex z2)
+t_complex	sum_c(t_complex z1, t_complex z2)
 {
 	t_complex	result;
 
@@ -26,7 +21,7 @@ t_complex	sum(t_complex z1, t_complex z2)
 	return (result);
 }
 
-t_complex	square(t_complex z)
+t_complex	square_c(t_complex z)
 {
 	t_complex	result;
 
@@ -72,4 +67,11 @@ double	ft_atof(const char *str)
 		}
 	}
 	return (sign * res[0]);
+}
+
+double	ft_fabs(double n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
 }

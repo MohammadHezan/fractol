@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:43:10 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/19 20:44:48 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/20 16:19:33 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,26 @@ static void	init_coords(int x, int y, t_fractol *f, double coords[4])
 	}
 }
 
-static void	calc_mandel(double *z_r, double *z_i, double c_r, double c_i)
+static void	iterate(double *coords, t_fractol *fractol)
 {
 	double	tmp;
+	double	abs_zr;
+	double	abs_zi;
 
-	tmp = *z_r * *z_r - *z_i * *z_i + c_r;
-	*z_i = 2 * *z_r * *z_i + c_i;
-	*z_r = tmp;
+	if (!ft_strncmp(fractol->name, "burning_ship", 12))
+	{
+		abs_zr = ft_fabs(coords[0]);
+		abs_zi = ft_fabs(coords[1]);
+		tmp = abs_zr * abs_zr - abs_zi * abs_zi + coords[2];
+		coords[1] = 2 * abs_zr * abs_zi + coords[3];
+		coords[0] = tmp;
+	}
+	else
+	{
+		tmp = coords[0] * coords[0] - coords[1] * coords[1] + coords[2];
+		coords[1] = 2 * coords[0] * coords[1] + coords[3];
+		coords[0] = tmp;
+	}
 }
 
 void	handle_pixel(int real, int imag, t_fractol *fractol)
@@ -73,7 +86,7 @@ void	handle_pixel(int real, int imag, t_fractol *fractol)
 			imag_pixel_put(real, imag, &fractol->img, color);
 			return ;
 		}
-		calc_mandel(&coords[0], &coords[1], coords[2], coords[3]);
+		iterate(coords, fractol);
 		i++;
 	}
 	imag_pixel_put(real, imag, &fractol->img, BLACK);

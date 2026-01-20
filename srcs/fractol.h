@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:32:23 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/19 20:45:46 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/20 16:19:32 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
+# include "mlx.h"
 
-# define WIDTH 2000
-# define HEIGHT 400
+# define WIDTH 800
+# define HEIGHT 800
 
 # define BLACK       0x000000
-# define WHITE       0xFFFFFF
-# define GREEN       0x00FF00
-# define BLUE        0x0000FF
-
-# define MAGENTA_BURST   0xFF00FF
-# define LIME_SHOCK      0xCCFF00
-# define NEON_ORANGE     0xFF6600
-# define PSYCHEDELIC_PURPLE 0x660066
-# define AQUA_DREAM      0x33CCCC
-# define HOT_PINK        0xFF66B2
-# define ELECTRIC_BLUE   0x0066FF
-# define LAVA_RED        0xFF3300
 
 # define XK_ESCAPE 65307
 # define XK_LEFT 65361
@@ -89,16 +77,13 @@ typedef struct s_fractol
 
 int			handle_mouse(int mouse_button, int mouse_x, int mouse_y,
 				t_fractol *fractol);
-int			close_window(t_fractol *fractol);
+int			close_window(t_fractol *fractol, char *msg, int code);
 int			handle_keypress(int keycode, t_fractol *fractol);
-
-void		error(void);
 void		init_fractol(t_fractol *fractol);
 void		events_init(t_fractol *fractol);
 void		image_data(t_fractol *fractol);
-double		map(double num, double new_min, double new_max, double old_max);
-t_complex	sum(t_complex z1, t_complex z2);
-t_complex	square(t_complex z);
+t_complex	sum_c(t_complex z1, t_complex z2);
+t_complex	square_c(t_complex z);
 void		handle_pixel(int real, int imag, t_fractol *fractol);
 int			fractol_render(t_fractol *fractol);
 void		imag_pixel_put(int real, int imag, t_image *img, int color);
@@ -110,5 +95,7 @@ int			scheme_ice(int i, int max_iter);
 int			scheme_purple(int i, int max_iter);
 int			scheme_green(int i, int max_iter);
 double		ft_atof(const char *str);
+double		ft_fabs(double n);
+size_t		ft_strlen(const char *str);
 
 #endif
