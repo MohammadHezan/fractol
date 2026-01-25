@@ -30,7 +30,7 @@ Fract'ol is a 42 school project that introduces the concept of fractals and comp
 ### Prerequisites
 
 - Linux operating system
-- GCC compiler
+- CC compiler
 - X11 development libraries (`libxext-dev`, `libx11-dev`)
 - Make
 
@@ -92,10 +92,6 @@ make
 - [Burning Ship Fractal - Wikipedia](https://en.wikipedia.org/wiki/Burning_Ship_fractal) - The Burning Ship variant
 - [MiniLibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx) - Graphics library reference
 - [Complex Number Tutorial](https://mathworld.wolfram.com/ComplexNumber.html) - Understanding complex arithmetic
-
-### AI Usage Disclosure
-
-AI tools were **not** used in the development of this project. All code, including fractal algorithms, color schemes, event handling, and rendering logic, was written manually based on mathematical concepts and the MiniLibX documentation.
 
 ## Technical Details
 

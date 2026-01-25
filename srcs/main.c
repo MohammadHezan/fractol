@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:32:09 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/20 16:24:44 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/23 18:28:16 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 
 static int	is_valid_float(const char *str)
 {
-	int	has_digit;
+	int	i;
 	int	has_dot;
 
-	has_digit = 0;
+	i = 0;
 	has_dot = 0;
-	if (*str == '-' || *str == '+')
-		str++;
-	if (*str == '.')
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] == '.' || !str[i])
 		return (0);
-	while (*str)
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	if (str[i] == '.')
 	{
-		if (*str >= '0' && *str <= '9')
-			has_digit = 1;
-		else if (*str == '.' && !has_dot)
-			has_dot = 1;
-		else
-			return (0);
-		str++;
+		has_dot = 1;
+		i++;
 	}
-	return (has_digit);
+	if (has_dot && !(str[i] >= '0' && str[i] <= '9'))
+		return (0);
+	while (str[i] >= '0' && str[i] <= '9')
+		i++;
+	return (has_dot && !str[i]);
 }
 
 static void	init_julia_params(t_fractol *fractol, char **argv)
@@ -77,6 +78,11 @@ int	main(int argc, char **argv)
 		run_fractol(&fractol);
 	}
 	else
-		close_window(&fractol, "Usage: mandelbrot | julia <r> <i> | ship", 1);
+	{
+		fractol.mlx = NULL;
+		fractol.win = NULL;
+		fractol.img.img_ptr = NULL;
+		close_window(NULL, "Usage: mandelbrot | julia <r> <i> | ship", 1);
+	}
 	return (0);
 }

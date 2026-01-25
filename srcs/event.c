@@ -6,7 +6,7 @@
 /*   By: mhaizan <mhaizan@student.42amman.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 16:59:35 by mhaizan           #+#    #+#             */
-/*   Updated: 2026/01/20 16:28:55 by mhaizan          ###   ########.fr       */
+/*   Updated: 2026/01/23 18:14:22 by mhaizan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,17 @@ int	handle_mouse(int button, int x, int y, t_fractol *fractol)
 
 int	close_window(t_fractol *fractol, char *msg, int code)
 {
-	if (fractol->img.img_ptr)
-		mlx_destroy_image(fractol->mlx, fractol->img.img_ptr);
-	if (fractol->win)
-		mlx_destroy_window(fractol->mlx, fractol->win);
-	if (fractol->mlx)
+	if (fractol)
 	{
-		mlx_loop_end(fractol->mlx);
-		free(fractol->mlx);
+		if (fractol->img.img_ptr)
+			mlx_destroy_image(fractol->mlx, fractol->img.img_ptr);
+		if (fractol->win)
+			mlx_destroy_window(fractol->mlx, fractol->win);
+		if (fractol->mlx)
+		{
+			mlx_loop_end(fractol->mlx);
+			free(fractol->mlx);
+		}
 	}
 	if (msg)
 		write(2, msg, ft_strlen(msg));
