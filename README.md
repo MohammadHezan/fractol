@@ -11,7 +11,7 @@
   ![Score](https://img.shields.io/badge/Score-125%2F100-brightgreen)
   
   <p><strong>A 42 School Graphics Project by mhaizan</strong></p>
-  <img width="201" height="170" alt="fractol score" src="https://github.com/user-attachments/assets/2a9c6e0c-a707-4d51-8806-073e49727ae8" />
+  <img width="201" height="170" alt="Screenshot from 2026-02-06 13-20-44" src="https://github.com/user-attachments/assets/cdd35166-a18a-4e7b-a86b-36fd53985184" />
 
 </div>
 
